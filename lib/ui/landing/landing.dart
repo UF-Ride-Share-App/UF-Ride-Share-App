@@ -1,13 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:uf_ride_share_app/utils/firebase_auth.dart';
+// class Landing extends StatelessWidget {
+  
+//   Landing();
 
-class HomePage extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container();
+//   }
+// }
+
+
+class Landing extends StatelessWidget {
+  
+  Landing();
+  
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Home Page'),
-      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

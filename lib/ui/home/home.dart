@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'placeholder_widget.dart' as first;
+//import 'package:uf_ride_share_app/utils/firebase_auth.dart';
+import '../landing/landing.dart';
+import '../posting/posting.dart';
+import '../profile/profile.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -10,34 +13,37 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int _currentIndex = 0; //track index of currently selected tab
+  
   final List<Widget> _children = [
-    first.PlaceholderWidget(),
-    first.PlaceholderWidget(),
-    first.PlaceholderWidget(),
+    Profile(),
+    Landing(),
+    Posting(),
   ]; //list of widgets we want to render based on selected tab
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('My Flutter App'),
       ),
-      body: _children[
-          _currentIndex], // show widget (b/t app bar and bot nav) from list based on index
+      body: _children[_currentIndex], // show widget (b/t app bar and bot nav) from list based on index
       bottomNavigationBar: BottomNavigationBar(
         onTap: onTabTapped, // function to be called when click a tab
-        currentIndex:
-            _currentIndex, // save currentIndex property of bot nav as _currentIndex from state's property
+        currentIndex: _currentIndex, // save currentIndex property of bot nav as _currentIndex from state's property
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Colors.lightGreenAccent,
         items: [
           BottomNavigationBarItem(
-            icon: new Icon(Icons.account_circle),
+            icon: new Icon(Icons.account_circle, color: Colors.tealAccent[700]),
             title: new Text('Account'),
           ),
           BottomNavigationBarItem(
-            icon: new Icon(Icons.home),
+            icon: new Icon(Icons.home, color: Colors.tealAccent[700]),
             title: new Text('Home'),
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.add_circle), title: Text('Post'))
+              icon: Icon(Icons.add_circle, color: Colors.tealAccent[700]), 
+              title: Text('Post')),
         ],
       ),
     );
