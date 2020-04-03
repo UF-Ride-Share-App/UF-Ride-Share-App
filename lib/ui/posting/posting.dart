@@ -11,7 +11,7 @@ class Posting extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Container(decoration: new BoxDecoration(color: Colors.red))
+          Container(decoration: new BoxDecoration(color: Colors.red), height: 200.0,)
         ],
       ),
     );

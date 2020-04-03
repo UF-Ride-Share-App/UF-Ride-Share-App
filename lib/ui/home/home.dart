@@ -23,15 +23,13 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('My Flutter App'),
-      ),
       body: _children[_currentIndex], // show widget (b/t app bar and bot nav) from list based on index
       bottomNavigationBar: BottomNavigationBar(
         onTap: onTabTapped, // function to be called when click a tab
         currentIndex: _currentIndex, // save currentIndex property of bot nav as _currentIndex from state's property
         type: BottomNavigationBarType.fixed,
         backgroundColor: Colors.lightGreenAccent,
+        iconSize: 30,
         items: [
           BottomNavigationBarItem(
             icon: new Icon(Icons.account_circle, color: Colors.tealAccent[700]),
