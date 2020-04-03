@@ -12,7 +12,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  int _currentIndex = 0; //track index of currently selected tab
+  int _currentIndex = 1; //track index of currently selected tab
   
   final List<Widget> _children = [
     Profile(),
