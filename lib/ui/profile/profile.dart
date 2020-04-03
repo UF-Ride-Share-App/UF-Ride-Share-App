@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'profile_header.dart';
 
 class Profile extends StatefulWidget {
   @override
@@ -19,17 +20,28 @@ class _ProfileMainHeader extends State<Profile> {
                 floating: false,
                 pinned: true,
                 backgroundColor: Colors.lightGreenAccent,
-                flexibleSpace: FlexibleSpaceBar(title: Text('John Doe')),
+                flexibleSpace: FlexibleSpaceBar(
+                  background: ProfileHeader(),
+                  centerTitle: true,
+                  title: Text('John Doe')
+                ),
+                actions: <Widget>[
+                  IconButton(
+                    icon: Icon(Icons.settings), 
+                    onPressed: () {},
+                  ),
+                ],
               ),
               SliverPersistentHeader(
                 delegate: _SliverAppBarTabBar(
                   TabBar(
                     labelColor: Colors.black,
                     unselectedLabelColor: Colors.black,
+                    indicatorColor: Colors.lightGreenAccent,
                     tabs: [
-                      Tab(icon: Icon(Icons.event), text: 'Test 1'),
-                      Tab(icon: Icon(Icons.departure_board), text: 'Test 2'),
-                      Tab(icon: Icon(Icons.history), text: 'Test 3'),
+                      Tab(text: 'Postings'),
+                      Tab(text: 'Upcoming Trips'),
+                      Tab(text: 'Ride History'),
                     ]),
                 ),
                 pinned: true,
@@ -37,7 +49,7 @@ class _ProfileMainHeader extends State<Profile> {
               SliverFillRemaining(),
             ];
           },
-          body: Center(child: Text('data'),)
+          body: Center(child: Text('data'))
         )
       )
     );
