@@ -61,10 +61,10 @@ flutter:
   fonts:
     - family: Ubuntu
       fonts:
-        - asset: assets/fonts/Ubuntu-Bold.ttf
-        - asset: assets/fonts/Ubuntu-BoldItalic.ttf
-        - asset: assets/fonts/Ubuntu-Italic.ttf
-        - asset: assets/fonts/Ubuntu-Regular.ttf
+        - asset: lib/assets/fonts/Ubuntu-Bold.ttf
+        - asset: lib/assets/fonts/Ubuntu-BoldItalic.ttf
+        - asset: lib/assets/fonts/Ubuntu-Italic.ttf
+        - asset: lib/assets/fonts/Ubuntu-Regular.ttf
 
   #
   # For details regarding fonts from package dependencies,
