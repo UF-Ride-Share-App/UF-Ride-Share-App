@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:uf_ride_share_app/utils/firebase_auth.dart';
 import 'profile_header.dart';
 
 class Profile extends StatefulWidget {
@@ -26,11 +27,24 @@ class _ProfileMainHeader extends State<Profile> {
                   title: Text('John Doe')
                 ),
                 actions: <Widget>[
-                  IconButton(
+                  PopupMenuButton(
+                    onSelected: settingsButtonAction,
                     icon: Icon(Icons.settings), 
-                    onPressed: () {},
+                    itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+                      const PopupMenuItem<String>(
+                        value: 'Logout',
+                        child: ListTile(
+                          leading: Icon(Icons.exit_to_app),
+                          title: Text('Logout'),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
+                actionsIconTheme: IconThemeData(
+                  size: 30.0,
+                  color: Colors.tealAccent[700]
+                ),
               ),
               SliverPersistentHeader(
                 delegate: _SliverAppBarTabBar(
@@ -53,6 +67,13 @@ class _ProfileMainHeader extends State<Profile> {
         )
       )
     );
+  }
+
+  void settingsButtonAction(String choice) {
+    if(choice == 'Logout')
+    {
+      AuthProvider().logOut();
+    }
   }
 }
 

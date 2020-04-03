@@ -29,7 +29,7 @@ class _HomeState extends State<Home> {
         currentIndex: _currentIndex, // save currentIndex property of bot nav as _currentIndex from state's property
         type: BottomNavigationBarType.fixed,
         backgroundColor: Colors.lightGreenAccent,
-        iconSize: 30,
+        iconSize: 30.0,
         items: [
           BottomNavigationBarItem(
             icon: new Icon(Icons.account_circle, color: Colors.tealAccent[700]),
