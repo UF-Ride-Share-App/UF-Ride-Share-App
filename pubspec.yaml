@@ -61,9 +61,13 @@ flutter:
     - family: Ubuntu
       fonts:
         - asset: assets/fonts/Ubuntu-Bold.ttf
+          weight: 600
         - asset: assets/fonts/Ubuntu-BoldItalic.ttf
+          weight: 500
         - asset: assets/fonts/Ubuntu-Italic.ttf
+          weight: 200
         - asset: assets/fonts/Ubuntu-Regular.ttf
+          weight: 300
 
   #
   # For details regarding fonts from package dependencies,
