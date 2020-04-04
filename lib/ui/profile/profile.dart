@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:uf_ride_share_app/ui/profile/history.dart';
+import 'package:uf_ride_share_app/ui/profile/postings.dart';
+import 'package:uf_ride_share_app/ui/profile/upcoming.dart';
 import 'package:uf_ride_share_app/utils/firebase_auth.dart';
 import 'profile_header.dart';
+import '../../styles/style.dart';
 
 class Profile extends StatefulWidget {
   @override
@@ -8,6 +12,14 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileMainHeader extends State<Profile> {
+  int _currentIndex = 0;
+  
+  final List<Widget> _tabPages = [
+    Postings(),
+    Upcoming(),
+    History()
+  ];
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +36,7 @@ class _ProfileMainHeader extends State<Profile> {
                 flexibleSpace: FlexibleSpaceBar(
                   background: ProfileHeader(),
                   centerTitle: true,
-                  title: Text('John Doe')
+                  title: Text('John Doe', style: FlexibleSpaceBarTextStyle)
                 ),
                 actions: <Widget>[
                   PopupMenuButton(
@@ -49,24 +61,33 @@ class _ProfileMainHeader extends State<Profile> {
               SliverPersistentHeader(
                 delegate: _SliverAppBarTabBar(
                   TabBar(
+                    // onTap: onTabTapped,
                     labelColor: Colors.black,
                     unselectedLabelColor: Colors.black,
                     indicatorColor: Colors.lightGreenAccent,
                     tabs: [
                       Tab(text: 'Postings'),
-                      Tab(text: 'Upcoming Trips'),
+                      Tab(text: 'Future Trips'),
                       Tab(text: 'Ride History'),
                     ]),
                 ),
                 pinned: true,
               ),
-              SliverFillRemaining(),
+              //SliverFillRemaining(),
             ];
           },
-          body: Center(child: Text('data'))
+          body: TabBarView(children: [
+            Postings(),
+            Upcoming(),
+            History(),
+          ]),
         )
       )
     );
+  }
+
+  void onTabTapped(int index) {
+    _currentIndex = index;
   }
 
   void settingsButtonAction(String choice) {
@@ -90,17 +111,17 @@ class _SliverAppBarTabBar extends SliverPersistentHeaderDelegate {
 
   @override
   Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return new Container(
-      child: new Material(
-        color: Colors.tealAccent[700],
-        child: _tabBar,
+    BuildContext context, double shrinkOffset, bool overlapsContent) {
+      return new Container(
+        child: new Material(
+          color: Colors.tealAccent[700],
+          child: _tabBar,
       )
     );
   }
 
   @override
-  bool shouldRebuild(_SliverAppBarTabBar delegate) {
+  bool shouldRebuild(_SliverAppBarTabBar oldDelegate) {
     return false;
   }
 }

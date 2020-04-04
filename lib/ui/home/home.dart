@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-//import 'package:uf_ride_share_app/utils/firebase_auth.dart';
 import '../landing/landing.dart';
 import '../posting/posting.dart';
 import '../profile/profile.dart';
+import '../../styles/style.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -30,6 +30,8 @@ class _HomeState extends State<Home> {
         type: BottomNavigationBarType.fixed,
         backgroundColor: Colors.lightGreenAccent,
         iconSize: 30.0,
+        selectedLabelStyle: BottomNavBarTextStyle,
+        unselectedLabelStyle: BottomNavBarTextStyle,
         items: [
           BottomNavigationBarItem(
             icon: new Icon(Icons.account_circle, color: Colors.tealAccent[700]),
