@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:uf_ride_share_app/utils/firebase_auth.dart';
+import '../styles/style.dart';
+
 
 class LoginPage extends StatefulWidget {
   @override
@@ -24,13 +26,23 @@ class _LoginPageState extends State<LoginPage> {
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment:  CrossAxisAlignment.center,         
             children: <Widget>[
-              const SizedBox(height: 100.0),
+              Text("Ridin' Dirty", textAlign: TextAlign.center, style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 40.0,
+              ),),
+              const SizedBox(height: 20.0),
+
+              Image.asset('assets/images/car.png'),
+                            const SizedBox(height: 20.0),
+
+            
               Text("Login", style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 20.0
-              ),),
+              ),),const SizedBox(height: 20.0),
+              
               const SizedBox(height: 20.0),
               RaisedButton(
                 child: Text("Login with Google"),
@@ -39,6 +51,7 @@ class _LoginPageState extends State<LoginPage> {
                   if(!res)
                     print("error logging in with google");
                 },
+              
               ),
               TextField(
                 controller: _emailController,

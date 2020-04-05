@@ -26,7 +26,7 @@ class AuthProvider {
     }
   }
 
-  Future<bool> loginWithGoogle() async {
+   Future<bool> loginWithGoogle() async {
     try {
       GoogleSignIn googleSignIn = GoogleSignIn();
       GoogleSignInAccount account = await googleSignIn.signIn();
@@ -44,5 +44,7 @@ class AuthProvider {
       print("Error logging with google");
       return false;
     }
+  
+  
   }
 }
