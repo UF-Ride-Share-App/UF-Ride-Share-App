@@ -1,8 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:uf_ride_share_app/ui/home.dart';
+import 'package:uf_ride_share_app/ui/home/home.dart';
 import 'package:uf_ride_share_app/ui/login.dart';
 import 'package:uf_ride_share_app/ui/splash.dart';
+import 'styles/style.dart';
 
 void main() => runApp(MyApp());
 
@@ -13,7 +14,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        appBarTheme: AppBarTheme(
+          textTheme: TextTheme(title: AppBarTextStyle),
+        ),
+        tabBarTheme: TabBarTheme(
+          labelStyle: TabBarLabelStyle,
+        ),
       ),
       home: MainScreen(),
     );
@@ -32,7 +38,7 @@ class MainScreen extends StatelessWidget {
         if(!snapshot.hasData || snapshot.data == null)
           return LoginPage();
 
-        return HomePage();
+        return Home();
       },
     );
   }
