@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../styles/style.dart';
 
-
 /*
   Postings page with validator to check that there is no empty field
   Saves destination and arrival city in _fromCity and _toCity respectively
@@ -36,6 +35,11 @@ class _PostingState extends State<Posting> {
             margin: EdgeInsets.all(20),
             child: ListView(
               children: <Widget>[
+                Text(
+                  "Make a Posting",
+                  textAlign: TextAlign.center,
+                  style: FlexibleSpaceBarTextStyle
+                ),
                 // Departure form
                 new Container(
                   margin: EdgeInsets.all(10),
@@ -77,7 +81,7 @@ class _PostingState extends State<Posting> {
                       margin: EdgeInsets.only(right: 20),
                       alignment: Alignment.topLeft,
                       child: MaterialButton(
-                        color: Colors.lightBlue,
+                        color: Colors.tealAccent[700],
                         child: Icon(Icons.calendar_today),
                         onPressed: () {
                           showDatePicker(
@@ -130,7 +134,7 @@ class _PostingState extends State<Posting> {
                     child: new RaisedButton(
                       onPressed: _submit,
                       child: Text('Post'),
-                      color: Colors.lightBlue,
+                      color: Colors.tealAccent[700],
                     )),
               ],
             ),
