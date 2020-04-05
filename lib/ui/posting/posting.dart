@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../styles/style.dart';
+
 
 /*
   Postings page with validator to check that there is no empty field
