@@ -37,7 +37,16 @@ class _LoginPageState extends State<LoginPage> {
                 onPressed: () async {
                   bool res = await AuthProvider().loginWithGoogle();
                   if(!res)
-                    print("error logging in with google");
+                    print("error logging in with Google");
+                },
+              ),
+              const SizedBox(height: 20.0),
+              RaisedButton(
+                child: Text("Login with Facebook"),
+                onPressed: () async {
+                  bool res = await AuthProvider().loginWithFacebook();
+                  if(!res)
+                    print("error logging in with Facebook");
                 },
               ),
               TextField(
@@ -62,7 +71,7 @@ class _LoginPageState extends State<LoginPage> {
                     print("Email and password cannot be empty");
                     return;
                   }
-                  bool res = await AuthProvider().signInWithEmail(_emailController.text, _passwordController.text);
+                  bool res = await AuthProvider().loginWithEmail(_emailController.text, _passwordController.text);
                   if(!res) {
                     print("Login failed");
                   }
