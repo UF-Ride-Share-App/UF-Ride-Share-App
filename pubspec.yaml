@@ -25,6 +25,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   firebase_auth: ^0.15.5+3
   google_sign_in: ^4.2.0
+  flutter_facebook_login: ^2.0.0
 
 dev_dependencies:
   flutter_test:
