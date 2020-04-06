@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../components/ride_card.dart';
 
 class History extends StatelessWidget{
   @override
@@ -7,11 +8,11 @@ class History extends StatelessWidget{
     return SizedBox(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
-      child: SingleChildScrollView(
-        child: Container(
-          color: Colors.yellowAccent,
-          height: MediaQuery.of(context).size.height,
-        ),
+      child: Container(
+        padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+        color: Colors.white,
+        height: MediaQuery.of(context).size.height,
+        child: RideCard(),
       ),
     );
   }
