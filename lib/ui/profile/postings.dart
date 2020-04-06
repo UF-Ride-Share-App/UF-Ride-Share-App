@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../components/ride_card.dart';
 
 class Postings extends StatelessWidget{
 
@@ -8,11 +9,11 @@ class Postings extends StatelessWidget{
     return SizedBox(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
-      child: SingleChildScrollView(
-        child: Container(
-          color: Colors.blue,
-          height: MediaQuery.of(context).size.height,
-        ),
+      child: Container(
+        padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+        color: Colors.white,
+        height: MediaQuery.of(context).size.height,
+        child: RideCard(),
       ),
     );
   }
