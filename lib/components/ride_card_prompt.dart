@@ -7,16 +7,18 @@ class RideCartPrompt extends StatelessWidget {
     return showDialog(
       context: context, builder: (context) {
         return AlertDialog(
-          title: Text('TEST'),
-          content: Container(
+          title: Text('Ride Details', textAlign: TextAlign.center,),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+          elevation: 120,
+          child: Container(
             height: 20.0,
             width: 20.0,
-            color: Colors.orange,
+            color: Colors.orange,          
           ),
           actions: <Widget>[
             MaterialButton(
-              child: Text('Close'),
-              onPressed: () {print('close');}
+              child: Text('Join Ride ', textAlign: TextAlign.left,),
+              onPressed: () {print('ride join clicked');}
             ),
           ],
         );

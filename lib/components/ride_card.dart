@@ -15,7 +15,7 @@ class RideCard extends StatelessWidget {
           child: CupertinoButton(
             color: Colors.tealAccent[700],
             onPressed: () {
-              // print('pressed');
+              // print('pressed'); 
               RideCartPrompt().createDialog(context);
             },
             child: Container(

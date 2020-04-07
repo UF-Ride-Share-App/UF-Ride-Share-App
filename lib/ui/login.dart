@@ -45,7 +45,7 @@ class _LoginPageState extends State<LoginPage> {
               
               const SizedBox(height: 20.0),
               RaisedButton(
-                child: Text("Login with Google"),
+                child: Text("Loginn with Google"),
                 onPressed: () async {
                   bool res = await AuthProvider().loginWithGoogle();
                   if(!res)
