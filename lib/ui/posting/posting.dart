@@ -35,19 +35,21 @@ class _PostingState extends State<Posting> {
             margin: EdgeInsets.all(20),
             child: ListView(
               children: <Widget>[
-                Text(
-                  "Make a Posting",
-                  textAlign: TextAlign.center,
-                  style: FlexibleSpaceBarTextStyle
-                ),
+                Text("Make a Posting",
+                    textAlign: TextAlign.center,
+                    style: FlexibleSpaceBarTextStyle),
                 // Departure form
                 new Container(
                   margin: EdgeInsets.all(10),
                   child: new TextFormField(
-                    decoration: const InputDecoration(
-                      hintText: 'Enter the city you are leaving from',
-                      labelText: 'Departure City',
-                    ),
+                    style: TextStyle(fontFamily: FontNameUbuntu, fontSize: 18),
+                    decoration: InputDecoration(
+                        hintText: 'Enter the city you are leaving from',
+                        labelText: 'Departure City',
+                        labelStyle: TextStyle(
+                            color: Colors.tealAccent[700],
+                            fontFamily: FontNameUbuntu),
+                        hintStyle: TextStyle(fontSize: 18)),
                     validator: (input) =>
                         input.isEmpty ? "Please enter a city name" : null,
                     onSaved: (input) => _fromCity = input,
@@ -57,10 +59,14 @@ class _PostingState extends State<Posting> {
                 new Container(
                   margin: EdgeInsets.all(10),
                   child: new TextFormField(
-                    decoration: const InputDecoration(
-                      hintText: 'Enter the city you are going to',
-                      labelText: 'Arrival City',
-                    ),
+                    style: TextStyle(fontFamily: FontNameUbuntu, fontSize: 18),
+                    decoration: InputDecoration(
+                        hintText: 'Enter the city you are going to',
+                        labelText: 'Arrival City',
+                        labelStyle: TextStyle(
+                            color: Colors.tealAccent[700],
+                            fontFamily: FontNameUbuntu),
+                        hintStyle: TextStyle(fontSize: 18)),
                     validator: (input) =>
                         input.isEmpty ? "Please enter a city name" : null,
                     onSaved: (input) => _toCity = input,
@@ -75,7 +81,8 @@ class _PostingState extends State<Posting> {
                           _dateTime == null
                               ? 'No date chosen'
                               : _dateTime.toString().split(' ')[0],
-                          style: TextStyle(fontSize: 16.0))),
+                          style: TextStyle(
+                              fontSize: 16, fontFamily: FontNameUbuntu))),
                   //Date picker button
                   Container(
                       margin: EdgeInsets.only(right: 20),
@@ -98,7 +105,9 @@ class _PostingState extends State<Posting> {
                           });
                         },
                       )),
-                  Text('Seats:', style: TextStyle(fontSize: 16.0)),
+                  Text('Seats:',
+                      style: TextStyle(
+                          fontSize: 16.0, fontFamily: FontNameUbuntu)),
                   //Seats picker
                   Container(
                       margin: EdgeInsets.only(left: 10, right: 20),
@@ -117,8 +126,10 @@ class _PostingState extends State<Posting> {
                 ]),
                 Container(
                     alignment: Alignment.topLeft,
-                    margin: EdgeInsets.only(left: 10, top: 10),
-                    child: Text('Description', style: TextStyle(fontSize: 16))),
+                    margin: EdgeInsets.all(10),
+                    child: Text('Description',
+                        style: TextStyle(
+                            fontSize: 20, fontFamily: FontNameUbuntu))),
                 Container(
                     margin: EdgeInsets.all(10),
                     child: TextField(
@@ -133,7 +144,9 @@ class _PostingState extends State<Posting> {
                     margin: EdgeInsets.only(left: 10, right: 10),
                     child: new RaisedButton(
                       onPressed: _submit,
-                      child: Text('Post'),
+                      child: Text('Post',
+                          style: TextStyle(
+                              fontFamily: FontNameUbuntu, fontSize: 18)),
                       color: Colors.tealAccent[700],
                     )),
               ],
