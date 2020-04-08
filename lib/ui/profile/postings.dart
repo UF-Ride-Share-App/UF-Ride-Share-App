@@ -10,7 +10,7 @@ class Postings extends StatelessWidget{
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
       child: Container(
-        padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+        padding: EdgeInsets.all(10),
         color: Colors.white,
         height: MediaQuery.of(context).size.height,
         child: RideCard(),

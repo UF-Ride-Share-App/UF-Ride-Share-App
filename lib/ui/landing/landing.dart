@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:uf_ride_share_app/ui/profile/postings.dart';
 import 'package:uf_ride_share_app/ui/landing/search.dart';
 
 class Landing extends StatelessWidget {
@@ -35,7 +36,7 @@ class Landing extends StatelessWidget {
                 ),
                 Expanded(
                   flex: 11,
-                  child: Container(color: Colors.yellow),
+                  child: Postings(),
                 )
               ],
             )));

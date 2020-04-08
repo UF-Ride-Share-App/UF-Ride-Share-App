@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:uf_ride_share_app/ui/landing/datePicker.dart';
+import 'package:uf_ride_share_app/components/date_picker.dart';
 
 class Search extends StatelessWidget {
   final top = Container(
@@ -43,6 +43,7 @@ final bottom = Container(
       padding: EdgeInsets.all(10.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           top,
           middle,
