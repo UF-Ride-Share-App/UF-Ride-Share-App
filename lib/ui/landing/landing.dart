@@ -30,7 +30,8 @@ class Landing extends StatelessWidget {
         padding: const EdgeInsets.all(10.0),
         child: Column(
           children: <Widget>[
-            Expanded(flex: 6, child: Search()),
+            Container(height: 250, child: Search()),
+            Divider(color: Colors.grey),
             Expanded(
               flex: 11,
               child: PostList(),
