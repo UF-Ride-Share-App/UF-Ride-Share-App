@@ -22,61 +22,51 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
+      body: SizedBox.expand(
+        child: Container(
+          color: Colors.white,
+          padding: const EdgeInsets.all(50),
           child: Column(
-            crossAxisAlignment:  CrossAxisAlignment.center,         
+            crossAxisAlignment: CrossAxisAlignment.center,  
+            mainAxisAlignment: MainAxisAlignment.center,       
             children: <Widget>[
-              Text("Ridinn' Dirty", textAlign: TextAlign.center, style: TextStyle(
+              Text("Ridin' Dirty", textAlign: TextAlign.center, style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 40.0,
               ),),
-              const SizedBox(height: 20.0),
-
               Image.asset('assets/images/car.png'),
-                            const SizedBox(height: 20.0),
-
-            
-              Text("Login", style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20.0
-              ),),const SizedBox(height: 20.0),
-              
-              const SizedBox(height: 20.0),
+              SizedBox(height: 20),
               RaisedButton(
-                child: Text("Loginn with Google"),
+                child: Text("Login with Google"),
                 onPressed: () async {
                   bool res = await AuthProvider().loginWithGoogle();
                   if(!res)
                     print("error logging in with Google");
                 },
               ),
-              const SizedBox(height: 20.0),
+              SizedBox.shrink(),
               RaisedButton(
-                child: Text("Login with Fcebook"),
+                child: Text("Login with Facebook"),
                 onPressed: () async {
                   bool res = await AuthProvider().loginWithFacebook();
                   if(!res)
                     print("error logging in with Facebook");
                 },
-              
               ),
+              SizedBox.shrink(),
               TextField(
                 controller: _emailController,
                 decoration: InputDecoration(
-                  hintText: "Email"
+                  hintText: "Email",
                 ),
               ),
-              const SizedBox(height: 10.0),
               TextField(
                 controller: _passwordController,
                 obscureText: true,
                 decoration: InputDecoration(
-                  hintText: "Password"
+                  hintText: "Password",
                 ),
               ),
-              const SizedBox(height: 10.0),
               RaisedButton(
                 child: Text("Login"),
                 onPressed: ()async {
