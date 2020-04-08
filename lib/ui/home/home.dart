@@ -31,7 +31,7 @@ class _HomeState extends State<Home> {
         backgroundColor: Colors.lightGreenAccent,
         iconSize: 30.0,
         selectedLabelStyle: BottomNavBarTextStyle,
-        unselectedLabelStyle: BottomNavBarTextStyle,
+        unselectedLabelStyle: BottomNavBarTextStyle, 
         items: [
           BottomNavigationBarItem(
             icon: new Icon(Icons.account_circle, color: Colors.tealAccent[700]),
