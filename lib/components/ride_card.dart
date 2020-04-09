@@ -9,7 +9,7 @@ class RideCard extends StatelessWidget {
 
   RideCard({this.ride});
 
-  Widget _buildLeft({Ride ride}) {
+  Widget _buildLeft(Ride ride) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -35,7 +35,7 @@ class RideCard extends StatelessWidget {
       ]);
   }
 
-  Widget _buildMiddle({Ride ride}) {
+  Widget _buildMiddle(Ride ride) {
     return Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -62,7 +62,7 @@ class RideCard extends StatelessWidget {
         ]);
   }
 
-  Widget _buildRight({Ride ride}) {
+  Widget _buildRight(Ride ride) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -99,15 +99,15 @@ class RideCard extends StatelessWidget {
                 children: <Widget>[
                   Expanded(
                     flex: 3,
-                    child: _buildLeft(),
+                    child: _buildLeft(ride),
                   ),
                   Expanded(
                     flex: 5,
-                    child: _buildMiddle(),
+                    child: _buildMiddle(ride),
                   ),
                   Expanded(
                     flex: 3,
-                    child: _buildRight(),
+                    child: _buildRight(ride),
                   ),
                 ],
               ),

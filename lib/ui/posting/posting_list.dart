@@ -42,26 +42,26 @@ class _PostListState extends State<PostList> {
   }
 
   Widget _buildStream(BuildContext context) {
-    // return StreamBuilder<QuerySnapshot>(
-    //   stream: Firestore.instance.collection('Rides').snapshots(),
-    //   builder: (context, snapshot) {
-    //     if (!snapshot.hasData) return LinearProgressIndicator();
-    //     return _buildList(context, snapshot.data.documents);
-    //   },
-    // );
-    return _buildList(context, dummySnapshot);
+    return StreamBuilder<QuerySnapshot>(
+      stream: Firestore.instance.collection('Rides').snapshots(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) return LinearProgressIndicator();
+        return _buildList(context, snapshot.data.documents);
+      },
+    );
+    // return _buildList(context, dummySnapshot);
   }
 
-  Widget _buildList(BuildContext context, List<Map> snapshot) {
+  Widget _buildList(BuildContext context, List<DocumentSnapshot> snapshot) {
     return ListView(
       padding: const EdgeInsets.only(top: 20.0),
       children: snapshot.map((data) => _buildListItem(context, data)).toList(),
     );
   }
 
-  Widget _buildListItem(BuildContext context, Map data) {
-    final ride = Ride.fromMap(data);
-    print(ride.endLocation);
+  Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
+    final ride = Ride.fromSnapshot(data);
+
     return RideCard(ride: ride);
   }
 }
