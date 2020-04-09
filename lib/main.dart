@@ -12,7 +12,12 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    //Wrap in gesture detector so that when click outside of input form, keyboard disappears
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+      },
+    child: MaterialApp(
       title: 'RideShare',
       theme: ThemeData(
         brightness: Brightness.light,
@@ -26,8 +31,8 @@ class MyApp extends StatelessWidget {
         ),
       ),
       home: MainScreen(),
-    );
-  }
+    )
+    );}
 }
 
 class MainScreen extends StatelessWidget {
