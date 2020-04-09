@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../components/ride_card.dart';
+import 'package:uf_ride_share_app/ui/posting/posting_list.dart';
 
 class Postings extends StatelessWidget{
 
@@ -13,7 +13,7 @@ class Postings extends StatelessWidget{
         padding: EdgeInsets.all(10),
         color: Colors.white,
         height: MediaQuery.of(context).size.height,
-        child: RideCard(),
+        child: PostList(),
       ),
     );
   }

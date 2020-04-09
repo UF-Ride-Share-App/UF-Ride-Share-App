@@ -15,6 +15,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'RideShare',
       theme: ThemeData(
+        brightness: Brightness.light,
+        primaryColor: Colors.teal[800],
+        accentColor: Colors.tealAccent[400],
         appBarTheme: AppBarTheme(
           textTheme: TextTheme(title: AppBarTextStyle),
         ),

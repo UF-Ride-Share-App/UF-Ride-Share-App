@@ -28,21 +28,20 @@ class _HomeState extends State<Home> {
         onTap: onTabTapped, // function to be called when click a tab
         currentIndex: _currentIndex, // save currentIndex property of bot nav as _currentIndex from state's property
         type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.lightGreenAccent,
         iconSize: 30.0,
         selectedLabelStyle: BottomNavBarTextStyle,
         unselectedLabelStyle: BottomNavBarTextStyle, 
         items: [
           BottomNavigationBarItem(
-            icon: new Icon(Icons.account_circle, color: Colors.tealAccent[700]),
+            icon: new Icon(Icons.account_circle),
             title: new Text('Account'),
           ),
           BottomNavigationBarItem(
-            icon: new Icon(Icons.home, color: Colors.tealAccent[700]),
+            icon: new Icon(Icons.home),
             title: new Text('Home'),
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.add_circle, color: Colors.tealAccent[700]), 
+              icon: Icon(Icons.add_circle), 
               title: Text('Post')),
         ],
       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:uf_ride_share_app/components/date_picker.dart';
 import '../../styles/style.dart';
 
 /*
@@ -75,38 +76,10 @@ class _PostingState extends State<Posting> {
                   ),
                 ),
                 //Show chosen date
-                new Row(children: <Widget>[
-                  Container(
-                      margin: EdgeInsets.only(left: 20, right: 20),
-                      alignment: Alignment.topLeft,
-                      child: Text(
-                          _dateTime == null
-                              ? 'No date chosen'
-                              : _dateTime.toString().split(' ')[0],
-                          style: TextStyle(
-                              fontSize: 16, fontFamily: FontNameUbuntu))),
-                  //Date picker button
-                  Container(
-                      margin: EdgeInsets.only(right: 20),
-                      alignment: Alignment.topLeft,
-                      child: MaterialButton(
-                        color: Colors.tealAccent[700],
-                        child: Icon(Icons.calendar_today),
-                        onPressed: () {
-                          showDatePicker(
-                                  context: context,
-                                  initialDate: _dateTime == null
-                                      ? DateTime.now()
-                                      : _dateTime,
-                                  firstDate: DateTime(2020),
-                                  lastDate: DateTime(2021))
-                              .then((date) {
-                            setState(() {
-                              _dateTime = date;
-                            });
-                          });
-                        },
-                      )),
+                new Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                  MyDatePicker(),
                   Text('Seats:',
                       style: TextStyle(
                           fontSize: 16.0, fontFamily: FontNameUbuntu)),

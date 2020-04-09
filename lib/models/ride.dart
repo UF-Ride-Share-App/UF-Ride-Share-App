@@ -10,8 +10,12 @@ class Ride {
   final String endLocation;
   final DocumentReference reference;
 
-  Ride.fromMap(Map<String, dynamic> map, {this.reference, this.id}) :
-        assert(map['driver'] != null),
+  int getAvailableSeats() {
+    return seats - passengers.length;
+  }
+
+  Ride.fromMap(Map<String, dynamic> map, {this.reference, this.id})
+      : assert(map['driver'] != null),
         assert(map['passengers'] != null),
         assert(map['time'] != null),
         assert(map['seats'] != null),
@@ -25,5 +29,6 @@ class Ride {
         endLocation = map['end_location'];
 
   Ride.fromSnapshot(DocumentSnapshot snapshot)
-      : this.fromMap(snapshot.data, reference: snapshot.reference, id:snapshot.reference.documentID);
+      : this.fromMap(snapshot.data,
+            reference: snapshot.reference, id: snapshot.reference.documentID);
 }

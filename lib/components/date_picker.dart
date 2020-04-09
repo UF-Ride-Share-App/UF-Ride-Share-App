@@ -10,12 +10,14 @@ class MyDatePicker extends StatefulWidget {
 }
 
 class _MyDatePickerState extends State<MyDatePicker> {
-  DateTime selectedDate = DateTime.now();
+  DateTime selectedDate;
 
   Future<Null> _selectDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
         context: context,
-        initialDate: selectedDate,
+        initialDate: selectedDate == null
+            ? DateTime.now()
+            : selectedDate,
         firstDate: DateTime(2020),
         lastDate: DateTime(2030));
     if (picked != null && picked != selectedDate)
@@ -30,11 +32,23 @@ class _MyDatePickerState extends State<MyDatePicker> {
       padding: EdgeInsets.all(5),
       child: Row (
       children: <Widget>[
-        Text(DateFormat.yMd().format(selectedDate)),
-        IconButton(
-          icon: Icon(Icons.calendar_today),
-          onPressed: () => _selectDate(context),
+        Container(
+          padding: EdgeInsets.only(left: 5, right: 5),
+          child:
+            Text(
+              selectedDate == null
+                ? 'No date chosen'
+                : DateFormat.yMd().format(selectedDate)
+            )
         ),
+        Container(
+          margin: EdgeInsets.only(left: 10, right: 10),
+          child:
+            IconButton(
+              icon: Icon(Icons.calendar_today),
+              onPressed: () => _selectDate(context),
+            ),
+        )
       ]));
   }
 }
