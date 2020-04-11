@@ -8,6 +8,7 @@ import 'styles/style.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -17,8 +18,11 @@ class MyApp extends StatelessWidget {
         FocusScope.of(context).unfocus();
       },
     child: MaterialApp(
-      title: 'Flutter Demo',
+      title: 'RideShare',
       theme: ThemeData(
+        brightness: Brightness.light,
+        primaryColor: Colors.teal[800],
+        accentColor: Colors.tealAccent[400],
         appBarTheme: AppBarTheme(
           textTheme: TextTheme(title: AppBarTextStyle),
         ),
@@ -36,12 +40,11 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return StreamBuilder(
       stream: FirebaseAuth.instance.onAuthStateChanged,
-      builder: (context,AsyncSnapshot<FirebaseUser> snapshot) {
-        if(snapshot.connectionState == ConnectionState.waiting)
+      builder: (context, AsyncSnapshot<FirebaseUser> snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting)
           return SplashPage();
 
-        if(!snapshot.hasData || snapshot.data == null)
-          return LoginPage();
+        if (!snapshot.hasData || snapshot.data == null) return LoginPage();
 
         return Home();
       },

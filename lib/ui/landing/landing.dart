@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:uf_ride_share_app/ui/posting/posting_list.dart';
+import 'package:uf_ride_share_app/ui/landing/search.dart';
 
 class Landing extends StatelessWidget {
-  
   Landing();
-  
+
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.lightGreenAccent,
@@ -25,20 +26,19 @@ class Landing extends StatelessWidget {
           size: 30.0,
         ),
       ),
-      // body: SingleChildScrollView(
-      //   child: Column(
-      //     crossAxisAlignment: CrossAxisAlignment.start,
-      //     children: <Widget>[
-      //       Text("Home page"),
-      //       RaisedButton(
-      //         child: Text("Log out"),
-      //         onPressed: (){
-      //           AuthProvider().logOut();
-      //         },
-      //       )
-      //     ],
-      //   ),
-      // ),
+      body: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Column(
+          children: <Widget>[
+            Container(height: 250, child: Search()),
+            Divider(color: Colors.grey),
+            Expanded(
+              flex: 11,
+              child: PostList(),
+            )
+          ],
+        )
+      )
     );
   }
 }
