@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:uf_ride_share_app/components/date_picker.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../styles/style.dart';
 
 /*
@@ -25,6 +26,7 @@ class _PostingState extends State<Posting> {
   var _numSeats = ["1", "2", "3", "4", "5"];
   var _numSeatsSelected = "1";
   String _description = "";
+  final databaseReference = Firestore.instance;
 
   //keep track of time
   TimeOfDay _time = TimeOfDay.now();
@@ -40,8 +42,8 @@ class _PostingState extends State<Posting> {
     MaterialLocalizations localizations = MaterialLocalizations.of(context);
     if (picked != null) {
       //format time as HH:MM am/pm
-      String formattedTime = localizations.formatTimeOfDay(picked,
-          alwaysUse24HourFormat: false);
+      String formattedTime =
+          localizations.formatTimeOfDay(picked, alwaysUse24HourFormat: false);
       if (formattedTime != null) {
         setState(() {
           timeText = formattedTime;
@@ -57,7 +59,7 @@ class _PostingState extends State<Posting> {
         child: new Container(
           alignment: Alignment.center,
           child: new Card(
-            margin: EdgeInsets.all(20),
+            margin: EdgeInsets.all(30),
             child: ListView(
               children: <Widget>[
                 Text("Make a Posting",
@@ -65,16 +67,19 @@ class _PostingState extends State<Posting> {
                     style: FlexibleSpaceBarTextStyle),
                 // Departure form
                 new Container(
-                  margin: EdgeInsets.all(15),
+                  margin:
+                      EdgeInsets.only(left: 20, right: 20, bottom: 15, top: 15),
                   child: new TextFormField(
                     style: TextStyle(fontFamily: FontNameUbuntu, fontSize: 18),
                     decoration: InputDecoration(
-                        hintText: 'Enter the city you are leaving from',
                         labelText: 'Departure City',
-                        labelStyle: TextStyle(
-                            color: Colors.tealAccent[700],
-                            fontFamily: FontNameUbuntu),
-                        hintStyle: TextStyle(fontSize: 18)),
+                        labelStyle:
+                            TextStyle(fontFamily: FontNameUbuntu, fontSize: 18),
+                        hintStyle: TextStyle(fontSize: 18),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Colors.tealAccent[700], width: 1.0),
+                        )),
                     validator: (input) =>
                         input.isEmpty ? "Please enter a city name" : null,
                     onSaved: (input) => _fromCity = input,
@@ -82,16 +87,18 @@ class _PostingState extends State<Posting> {
                 ),
                 //Arrival form
                 new Container(
-                  margin: EdgeInsets.all(15),
+                  margin: EdgeInsets.only(left: 20, right: 20, bottom: 10),
                   child: new TextFormField(
                     style: TextStyle(fontFamily: FontNameUbuntu, fontSize: 18),
                     decoration: InputDecoration(
-                        hintText: 'Enter the city you are going to',
                         labelText: 'Arrival City',
-                        labelStyle: TextStyle(
-                            color: Colors.tealAccent[700],
-                            fontFamily: FontNameUbuntu),
-                        hintStyle: TextStyle(fontSize: 18)),
+                        labelStyle:
+                            TextStyle(fontFamily: FontNameUbuntu, fontSize: 18),
+                        hintStyle: TextStyle(fontSize: 18),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Colors.tealAccent[700], width: 1.0),
+                        )),
                     validator: (input) =>
                         input.isEmpty ? "Please enter a city name" : null,
                     onSaved: (input) => _toCity = input,
@@ -100,7 +107,7 @@ class _PostingState extends State<Posting> {
                 //Show chosen date
                 new Row(children: <Widget>[
                   Container(
-                      margin: EdgeInsets.only(left: 20, right: 20),
+                      margin: EdgeInsets.all(15),
                       alignment: Alignment.topLeft,
                       child: Text(
                           _dateTime == null
@@ -133,10 +140,9 @@ class _PostingState extends State<Posting> {
                 //Time text
                 new Row(children: <Widget>[
                   Container(
-                      margin: EdgeInsets.only(left: 20, right: 20),
+                      margin: EdgeInsets.all(15),
                       alignment: Alignment.topLeft,
-                      child: Text(
-                          timeText == "" ? 'No time chosen' : timeText,
+                      child: Text(timeText == "" ? 'No time chosen' : timeText,
                           style: TextStyle(
                               fontSize: 20, fontFamily: FontNameUbuntu))),
                   //Time picker
@@ -150,14 +156,15 @@ class _PostingState extends State<Posting> {
                 //Seats text
                 new Row(children: <Widget>[
                   Container(
-                      margin: EdgeInsets.only(left: 20, right: 20),
+                      margin: EdgeInsets.only(right: 15, left: 15, bottom: 10),
                       child: Text('Seats:',
                           style: TextStyle(
                               fontSize: 20, fontFamily: FontNameUbuntu))),
                   //Seats picker
                   Container(
-                      margin: EdgeInsets.only(left: 10, right: 20),
+                      margin: EdgeInsets.only(bottom: 10),
                       child: DropdownButton<String>(
+                        iconEnabledColor: Colors.tealAccent[700],
                         items: _numSeats.map((String dropDownStringItem) {
                           return DropdownMenuItem<String>(
                             value: dropDownStringItem,
@@ -175,17 +182,25 @@ class _PostingState extends State<Posting> {
                 //Description text
                 Container(
                     alignment: Alignment.topLeft,
-                    margin: EdgeInsets.only(left: 15),
+                    margin: EdgeInsets.only(left: 15, bottom: 10),
                     child: Text('Description',
                         style: TextStyle(
                             fontSize: 20, fontFamily: FontNameUbuntu))),
                 //Description input form
                 Container(
-                    margin: EdgeInsets.only(left:15, right: 15),
+                    margin: EdgeInsets.only(left: 15, right: 15),
                     child: TextField(
+                      decoration: new InputDecoration(
+                          //To add border around input
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Colors.tealAccent[700], width: 1.0),
+                          ),
+                          labelText: "Additional information"),
                       keyboardType: TextInputType.multiline,
                       maxLines: null,
-                      style: TextStyle(fontSize: 20, fontFamily: FontNameUbuntu),
+                      style:
+                          TextStyle(fontSize: 20, fontFamily: FontNameUbuntu),
                       onChanged: (text) {
                         _description = text;
                       },
@@ -207,7 +222,7 @@ class _PostingState extends State<Posting> {
   }
 
 //if validate, then save input in city variables, else print error message
-  void _submit() {
+  void _submit() async {
     if (_dateTime == null) {
       print("error");
     }
@@ -220,6 +235,16 @@ class _PostingState extends State<Posting> {
       print(_numSeatsSelected);
       print(_description);
     }
+
+    await databaseReference.collection("Rides").add({
+      'description': _description,
+      'end_location': _toCity,
+      'seats': int.parse(_numSeatsSelected),
+      'start_location': _fromCity,
+      'time': new DateTime(_dateTime.year, _dateTime.month, _dateTime.day, picked.hour, picked.minute),
+      'driver': 'test',
+      'passengers': ['8383hsiefoijw']
+    });
   }
 
 //update shown value in list button with selected value
