@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:uf_ride_share_app/components/date_picker.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../styles/style.dart';
-
 
 /*
   Postings page with validator to check that there is no empty field
@@ -26,6 +26,7 @@ class _PostingState extends State<Posting> {
   var _numSeats = ["1", "2", "3", "4", "5"];
   var _numSeatsSelected = "1";
   String _description = "";
+  final databaseReference = Firestore.instance;
 
   //keep track of time
   TimeOfDay _time = TimeOfDay.now();
@@ -221,7 +222,7 @@ class _PostingState extends State<Posting> {
   }
 
 //if validate, then save input in city variables, else print error message
-  void _submit() {
+  void _submit() async {
     if (_dateTime == null) {
       print("error");
     }
@@ -234,6 +235,16 @@ class _PostingState extends State<Posting> {
       print(_numSeatsSelected);
       print(_description);
     }
+
+    await databaseReference.collection("Rides").add({
+      'description': _description,
+      'end_location': _toCity,
+      'seats': int.parse(_numSeatsSelected),
+      'start_location': _fromCity,
+      'time': new DateTime(_dateTime.year, _dateTime.month, _dateTime.day, picked.hour, picked.minute),
+      'driver': 'test',
+      'passengers': ['8383hsiefoijw']
+    });
   }
 
 //update shown value in list button with selected value
