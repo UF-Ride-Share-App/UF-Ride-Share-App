@@ -28,7 +28,7 @@ class RideCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(30.0),
             border: Border.all(
               color: Colors.lightGreenAccent,
-              width: 3,
+              width: 2.5,
             ),
           ),
         )
@@ -43,7 +43,7 @@ class RideCard extends StatelessWidget {
           Text(ride == null ? "-----" : ride.startLocation,
               style: TextStyle(color: Colors.black)),
           Container(
-              height: 16,
+              height: 16.0,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -86,7 +86,7 @@ class RideCard extends StatelessWidget {
       child: FlatButton(
         onPressed: () {
           // print('pressed');
-          RideCartPrompt().createDialog(context);
+          RideCartPrompt(ride: ride).createDialog(context);
         },
         child: Container(
           width: MediaQuery.of(context).size.width,
