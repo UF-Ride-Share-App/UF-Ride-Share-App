@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:uf_ride_share_app/components/date_picker.dart';
+import 'package:intl/intl.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../styles/style.dart';
 
@@ -22,7 +24,7 @@ class Posting extends StatefulWidget {
 class _PostingState extends State<Posting> {
   final _formKey = GlobalKey<FormState>();
   String _toCity, _fromCity;
-  DateTime _dateTime;
+  DateTime _date;
   var _numSeats = ["1", "2", "3", "4", "5"];
   var _numSeatsSelected = "1";
   String _description = "";
@@ -82,7 +84,7 @@ class _PostingState extends State<Posting> {
                         )),
                     validator: (input) =>
                         input.isEmpty ? "Please enter a city name" : null,
-                    onSaved: (input) => _fromCity = input,
+                    onChanged: (input) => _fromCity = input,
                   ),
                 ),
                 //Arrival form
@@ -101,7 +103,7 @@ class _PostingState extends State<Posting> {
                         )),
                     validator: (input) =>
                         input.isEmpty ? "Please enter a city name" : null,
-                    onSaved: (input) => _toCity = input,
+                    onChanged: (input) => _toCity = input,
                   ),
                 ),
                 //Show chosen date
@@ -110,9 +112,9 @@ class _PostingState extends State<Posting> {
                       margin: EdgeInsets.all(15),
                       alignment: Alignment.topLeft,
                       child: Text(
-                          _dateTime == null
+                          _date == null
                               ? 'No date chosen'
-                              : _dateTime.toString().split(' ')[0],
+                              : DateFormat.yMMMd().format(_date),
                           style: TextStyle(
                               fontSize: 20, fontFamily: FontNameUbuntu))),
                   //Date picker button
@@ -124,14 +126,13 @@ class _PostingState extends State<Posting> {
                         onPressed: () {
                           showDatePicker(
                                   context: context,
-                                  initialDate: _dateTime == null
-                                      ? DateTime.now()
-                                      : _dateTime,
+                                  initialDate:
+                                      _date == null ? DateTime.now() : _date,
                                   firstDate: DateTime(2020),
                                   lastDate: DateTime(2021))
                               .then((date) {
                             setState(() {
-                              _dateTime = date;
+                              _date = date;
                             });
                           });
                         },
@@ -223,27 +224,34 @@ class _PostingState extends State<Posting> {
 
 //if validate, then save input in city variables, else print error message
   void _submit() async {
-    if (_dateTime == null) {
-      print("error");
-    }
-    if (_formKey.currentState.validate()) {
-      _formKey.currentState.save();
-      print(_fromCity);
-      print(_toCity);
-      print(_dateTime);
-      print(timeText);
-      print(_numSeatsSelected);
-      print(_description);
-    }
+    // if (_date == null) {
+    //   print("error");
+    // }
+    // if (_formKey.currentState.validate()) {
+    //   _formKey.currentState.save();
+    //   print(_fromCity);
+    //   print(_toCity);
+    //   print(_date);
+    //   print(timeText);
+    //   print(_numSeatsSelected);
+    //   print(_description);
+    // }
+
+
+      //get id of logged in user
+      final FirebaseAuth _auth = FirebaseAuth.instance;
+      FirebaseUser user = await _auth.currentUser();
+      final uid = user.uid;
 
     await databaseReference.collection("Rides").add({
       'description': _description,
       'end_location': _toCity,
       'seats': int.parse(_numSeatsSelected),
       'start_location': _fromCity,
-      'time': new DateTime(_dateTime.year, _dateTime.month, _dateTime.day, picked.hour, picked.minute),
-      'driver': 'test',
-      'passengers': ['8383hsiefoijw']
+      'time': new DateTime(
+          _date.year, _date.month, _date.day, picked.hour, picked.minute),
+      'driver': uid,
+      'passengers': []
     });
   }
 
