@@ -12,13 +12,13 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileMainHeader extends State<Profile> {
-  int _currentIndex = 0;
+  // int _currentIndex = 0;
   
-  final List<Widget> _tabPages = [
-    Postings(),
-    Upcoming(),
-    History()
-  ];
+  // final List<Widget> _tabPages = [
+  //   Postings(),
+  //   Upcoming(),
+  //   History()
+  // ];
   
   @override
   Widget build(BuildContext context) {
@@ -86,9 +86,9 @@ class _ProfileMainHeader extends State<Profile> {
     );
   }
 
-  void onTabTapped(int index) {
-    _currentIndex = index;
-  }
+  // void onTabTapped(int index) {
+  //   _currentIndex = index;
+  // }
 
   void settingsButtonAction(String choice) {
     if(choice == 'Logout')

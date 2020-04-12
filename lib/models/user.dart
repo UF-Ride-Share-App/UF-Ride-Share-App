@@ -1,4 +1,12 @@
 import 'dart:convert';
+import 'package:firebase_auth/firebase_auth.dart';
+
+Future<String> getCurrentUser() async {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  FirebaseUser user = await _auth.currentUser();
+  final uid = user.uid;
+  return uid;
+}
 
 User userFromJson(String str) {
   final jsonData = json.decode(str);
