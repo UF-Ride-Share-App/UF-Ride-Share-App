@@ -243,20 +243,19 @@ class _PostingState extends State<Posting> {
       // final FirebaseAuth _auth = FirebaseAuth.instance;
       // FirebaseUser user = await _auth.currentUser();
       // final uid = user.uid;
-    getCurrentUser().then((currentUser) async {
-      await databaseReference.collection("Rides").add({
-        'description': _description,
-        'end_location': _toCity,
-        'seats': int.parse(_numSeatsSelected),
-        'start_location': _fromCity,
-        'time': new DateTime(
-          _date.year, _date.month, _date.day, picked.hour, picked.minute),
-        'driver': getCurrentUser(),
-        'passengers': []
-      });
-    });
+    String currentUser;
+    currentUser = await getCurrentUser();
 
-    
+    await databaseReference.collection("Rides").add({
+      'description': _description,
+      'end_location': _toCity,
+      'seats': int.parse(_numSeatsSelected),
+      'start_location': _fromCity,
+      'time': new DateTime(
+          _date.year, _date.month, _date.day, picked.hour, picked.minute),
+      'driver': currentUser,
+      'passengers': []
+    });
   }
 
 //update shown value in list button with selected value
