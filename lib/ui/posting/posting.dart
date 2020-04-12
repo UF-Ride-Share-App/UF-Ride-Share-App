@@ -57,7 +57,13 @@ class _PostingState extends State<Posting> {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
+    return Scaffold (
+      appBar: AppBar(
+         backgroundColor: Colors.lightGreenAccent,
+          title: Text("Make a Posting"),
+          centerTitle: true,
+      ),
+      body: Form(
         key: _formKey,
         child: new Container(
           alignment: Alignment.center,
@@ -65,9 +71,7 @@ class _PostingState extends State<Posting> {
             margin: EdgeInsets.all(30),
             child: ListView(
               children: <Widget>[
-                Text("Make a Posting",
-                    textAlign: TextAlign.center,
-                    style: FlexibleSpaceBarTextStyle),
+
 
                 // Departure form
                 new Container(
@@ -229,7 +233,7 @@ class _PostingState extends State<Posting> {
               ],
             ),
           ),
-        ));
+        )));
   }
 
 //if validate, then save input in city variables, else print error message
