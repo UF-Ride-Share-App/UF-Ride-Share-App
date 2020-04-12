@@ -275,6 +275,14 @@ class _PostingState extends State<Posting> {
         'driver': currentUser,
         'passengers': []
       });
+    } else {
+     //show snack bar
+     Scaffold.of(context).showSnackBar(
+       SnackBar(
+         content: Text("Please fill out all required information!"),
+         backgroundColor: Colors.red,
+       )
+     ); 
     }
   }
 
