@@ -8,6 +8,7 @@ class Ride {
   final int seats;
   final String startLocation;
   final String endLocation;
+  final String description;
   final DocumentReference reference;
 
   int getAvailableSeats() {
@@ -21,12 +22,14 @@ class Ride {
         assert(map['seats'] != null),
         assert(map['start_location'] != null),
         assert(map['end_location'] != null),
+        assert(map['description'] != null),
         driver = map['driver'],
         passengers = List<String>.from(map['passengers']),
         time = (map['time'] as Timestamp).toDate(),
         seats = map['seats'],
         startLocation = map['start_location'],
-        endLocation = map['end_location'];
+        endLocation = map['end_location'],
+        description = map['description'];
 
   Ride.fromSnapshot(DocumentSnapshot snapshot)
       : this.fromMap(snapshot.data,
