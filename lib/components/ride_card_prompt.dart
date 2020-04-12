@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 import 'package:uf_ride_share_app/models/ride.dart';
+import 'package:uf_ride_share_app/models/user.dart';
 
 class RideCartPrompt extends StatelessWidget {
 
@@ -22,19 +23,22 @@ class RideCartPrompt extends StatelessWidget {
     }
   }
   
-  createDialog(BuildContext context) {
+  createDialog(BuildContext context) async {
     int actionType;
     String buttonLabel;
 
     actionType = -1;
     buttonLabel = "Error";
 
+    String currentUser;
+    currentUser = await getCurrentUser();
+
     if(ride != null) {
-      if(ride.driver == "") { // If ride is the user's posting
+      if(ride.driver == currentUser) { // If ride is the user's posting
         actionType = 0;
         buttonLabel = "Edit Ride";
       }
-      else if(ride.passengers.indexWhere((passenger) => passenger == "") != -1) { // User is a passenger of the posting
+      else if(ride.passengers.indexWhere((passenger) => passenger == currentUser) != -1) { // User is a passenger of the posting
         actionType = 1;
         buttonLabel = "Leave";
       }
