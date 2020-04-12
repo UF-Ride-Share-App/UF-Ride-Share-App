@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:uf_ride_share_app/ui/posting/posting_list.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 
 class History extends StatelessWidget{
   
@@ -9,10 +11,10 @@ class History extends StatelessWidget{
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
       child: Container(
-        padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+        padding: EdgeInsets.all(10),
         color: Colors.white,
         height: MediaQuery.of(context).size.height,
-        child: PostList(),
+        child: PostList(Firestore.instance.collection('Rides').snapshots()),
       ),
     );
   }

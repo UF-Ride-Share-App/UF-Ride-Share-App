@@ -4,30 +4,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:uf_ride_share_app/components/ride_card.dart';
 import 'package:uf_ride_share_app/models/ride.dart';
 
-final dummySnapshot = [
-  {
-    'driver': '1',
-    'passengers': ['2'],
-    'time': Timestamp.fromDate(DateTime.now()),
-    'seats': 4,
-    'start_location': 'Gainesville',
-    'end_location': 'Miami'
-  },
-  {
-    'driver': '1',
-    'passengers': ['2', '3'],
-    'time': Timestamp.fromDate(DateTime.now()),
-    'seats': 3,
-    'start_location': 'Tampa',
-    'end_location': 'Gainesville'
-  }
-];
 
 class PostList extends StatefulWidget {
+  final Stream<QuerySnapshot> stream;
+
+  PostList(this.stream) : super();
+
   @override
-  _PostListState createState() {
-    return _PostListState();
-  }
+  _PostListState createState() => _PostListState();
 }
 
 class _PostListState extends State<PostList> {
@@ -43,13 +27,12 @@ class _PostListState extends State<PostList> {
 
   Widget _buildStream(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: Firestore.instance.collection('Rides').snapshots(),
+      stream: this.widget.stream,
       builder: (context, snapshot) {
         if (!snapshot.hasData) return LinearProgressIndicator();
         return _buildList(context, snapshot.data.documents);
       },
     );
-    // return _buildList(context, dummySnapshot);
   }
 
   Widget _buildList(BuildContext context, List<DocumentSnapshot> snapshot) {
@@ -61,7 +44,6 @@ class _PostListState extends State<PostList> {
 
   Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
     final ride = Ride.fromSnapshot(data);
-
     return RideCard(ride: ride);
   }
 }

@@ -55,7 +55,7 @@ class _ProfileMainHeader extends State<Profile> {
                 ],
                 actionsIconTheme: IconThemeData(
                   size: 30.0,
-                  color: Colors.tealAccent[700]
+                  color: Colors.teal[700]
                 ),
               ),
               SliverPersistentHeader(
@@ -114,7 +114,7 @@ class _SliverAppBarTabBar extends SliverPersistentHeaderDelegate {
     BuildContext context, double shrinkOffset, bool overlapsContent) {
       return new Container(
         child: new Material(
-          color: Colors.tealAccent[700],
+          color: Colors.teal[300],
           child: _tabBar,
       )
     );

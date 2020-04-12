@@ -81,7 +81,7 @@ class _PostingState extends State<Posting> {
                         hintStyle: TextStyle(fontSize: 18),
                         border: OutlineInputBorder(
                           borderSide: BorderSide(
-                              color: Colors.tealAccent[700], width: 1.0),
+                              color: Colors.teal[300], width: 1.0),
                         )),
                     validator: (input) =>
                         input.isEmpty ? "Please enter a city name" : null,
@@ -100,7 +100,7 @@ class _PostingState extends State<Posting> {
                         hintStyle: TextStyle(fontSize: 18),
                         border: OutlineInputBorder(
                           borderSide: BorderSide(
-                              color: Colors.tealAccent[700], width: 1.0),
+                              color: Colors.teal[300], width: 1.0),
                         )),
                     validator: (input) =>
                         input.isEmpty ? "Please enter a city name" : null,
@@ -121,8 +121,7 @@ class _PostingState extends State<Posting> {
                   //Date picker button
                   Container(
                       alignment: Alignment.topLeft,
-                      child: MaterialButton(
-                        color: Colors.tealAccent[700],
+                      child: RaisedButton(
                         child: Icon(Icons.calendar_today),
                         onPressed: () {
                           showDatePicker(
@@ -148,8 +147,7 @@ class _PostingState extends State<Posting> {
                           style: TextStyle(
                               fontSize: 20, fontFamily: FontNameUbuntu))),
                   //Time picker
-                  MaterialButton(
-                      color: Colors.tealAccent[700],
+                  RaisedButton(
                       child: Icon(Icons.access_time),
                       onPressed: () {
                         selectTime(context);
@@ -209,13 +207,13 @@ class _PostingState extends State<Posting> {
                     )),
                 //Post button
                 Container(
-                    margin: EdgeInsets.only(top: 10, left: 15, right: 15),
+                    margin: EdgeInsets.only(top: 20, left: 15, right: 15),
                     child: new RaisedButton(
                       onPressed: _submit,
                       child: Text('Post',
                           style: TextStyle(
                               fontFamily: FontNameUbuntu, fontSize: 18)),
-                      color: Colors.tealAccent[700],
+                      color: Colors.teal[300],
                     )),
               ],
             ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:uf_ride_share_app/ui/posting/posting_list.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Upcoming extends StatelessWidget{
 
@@ -12,7 +13,7 @@ class Upcoming extends StatelessWidget{
         padding: EdgeInsets.all(10),
         color: Colors.white,
         height: MediaQuery.of(context).size.height,
-        child: PostList(),
+        child: PostList(Firestore.instance.collection('Rides').snapshots()),
       ),
     );
   }

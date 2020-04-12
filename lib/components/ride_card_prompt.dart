@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-// import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 import 'package:uf_ride_share_app/models/ride.dart';
 import 'package:uf_ride_share_app/models/user.dart';
@@ -106,7 +105,7 @@ class RideCartPrompt extends StatelessWidget {
           actions: <Widget>[
             MaterialButton(
               child: Text(buttonLabel, textAlign: TextAlign.center,),
-              color: Colors.tealAccent[700] ,
+              color: Colors.teal[700] ,
               shape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
               onPressed: () {
                 actionToTake(actionType);
