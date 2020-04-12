@@ -126,21 +126,21 @@ class _PostingState extends State<Posting> {
                   Container(
                       alignment: Alignment.topLeft,
                       child: RaisedButton(
-                        child: Icon(Icons.calendar_today),
-                        onPressed: () {
-                          showDatePicker(
-                                  context: context,
-                                  initialDate:
-                                      _date == null ? DateTime.now() : _date,
-                                  firstDate: DateTime(2020),
-                                  lastDate: DateTime(2021))
-                              .then((date) {
-                            setState(() {
-                              _date = date;
+                          child: Icon(Icons.calendar_today),
+                          onPressed: () {
+                            showDatePicker(
+                                    context: context,
+                                    initialDate:
+                                        _date == null ? DateTime.now() : _date,
+                                    firstDate: DateTime(2020),
+                                    lastDate: DateTime(2021))
+                                .then((date) {
+                              setState(() {
+                                _date = date;
+                              });
                             });
-                          });
-                        },
-                      ))
+                          },
+                          color: Colors.tealAccent[700]))
                 ]),
 
                 //Time text
@@ -157,7 +157,8 @@ class _PostingState extends State<Posting> {
                       child: Icon(Icons.access_time),
                       onPressed: () {
                         selectTime(context);
-                      })
+                      },
+                      color: Colors.tealAccent[700])
                 ]),
 
                 //Seats text
