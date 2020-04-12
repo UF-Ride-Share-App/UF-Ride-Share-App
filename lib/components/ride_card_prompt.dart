@@ -93,7 +93,7 @@ class RideCartPrompt extends StatelessWidget {
               //Text(' ',style: TextStyle(height: 1.5)),
               Divider(color: Colors.black,),
               Text(
-                'This is where the driver can add a description regarding anything from luggage to pets' , 
+                ride == null ? "-----" : ride.description, 
                 style: TextStyle(height: 1.5), 
                 textAlign: TextAlign.justify
               )
