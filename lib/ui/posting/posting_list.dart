@@ -44,7 +44,6 @@ class _PostListState extends State<PostList> {
 
   Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
     final ride = Ride.fromSnapshot(data);
-
     return RideCard(ride: ride);
   }
 }

@@ -11,34 +11,22 @@ class RideCard extends StatelessWidget {
 
   Widget _buildLeft(Ride ride) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         Text(ride == null ? "-----" : DateFormat.MMMd().format(ride.time),
             style:
-                TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
-        Container(
-          padding: EdgeInsets.all(5),
-          width: 40.0,
-          height: 40.0,
-          decoration: new BoxDecoration(
-            image: new DecorationImage(
-              image: AssetImage('assets/images/sampleProfile.jpeg'),
-            ),
-            borderRadius: BorderRadius.circular(30.0),
-            border: Border.all(
-              color: Colors.lightGreenAccent,
-              width: 3,
-            ),
-          ),
-        )
+              TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18)),
+        Text(ride == null ? "--:--" : DateFormat.jm().format(ride.time),
+          style:
+              TextStyle(color: Colors.black)),
       ]);
   }
 
   Widget _buildMiddle(Ride ride) {
     return Column(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text(ride == null ? "-----" : ride.startLocation,
               style: TextStyle(color: Colors.black)),
@@ -81,35 +69,34 @@ class RideCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.all(10),
-      padding: EdgeInsets.all(15),
-      color: Colors.tealAccent[700],
       child: FlatButton(
+         color: Colors.teal[300],
+        shape: RoundedRectangleBorder(
+          borderRadius: new BorderRadius.circular(15.0),
+          side: BorderSide(color: Colors.lightGreenAccent)
+        ),
         onPressed: () {
           // print('pressed');
           RideCartPrompt().createDialog(context);
         },
         child: Container(
           width: MediaQuery.of(context).size.width,
-          height: 60.0,
-          child: Column(
+          height: 75.0,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Expanded(
-                    flex: 3,
-                    child: _buildLeft(ride),
-                  ),
-                  Expanded(
-                    flex: 5,
-                    child: _buildMiddle(ride),
-                  ),
-                  Expanded(
-                    flex: 3,
-                    child: _buildRight(ride),
-                  ),
-                ],
+              Expanded(
+                flex: 3,
+                child: _buildLeft(ride),
+              ),
+              Expanded(
+                flex: 5,
+                child: _buildMiddle(ride),
+              ),
+              Expanded(
+                flex: 3,
+                child: _buildRight(ride),
               ),
             ],
           ),

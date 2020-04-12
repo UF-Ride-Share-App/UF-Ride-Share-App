@@ -34,7 +34,7 @@ class RideCartPrompt extends StatelessWidget {
           actions: <Widget>[
             MaterialButton(
               child: Text('Join Ride ', textAlign: TextAlign.center,),
-              color: Colors.tealAccent[700] ,
+              color: Colors.teal[700] ,
               shape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
               onPressed: () {
                  Navigator.of(context).pop();

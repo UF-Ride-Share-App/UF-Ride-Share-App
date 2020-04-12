@@ -59,7 +59,7 @@ class ProfileHeader extends StatelessWidget {
           ),
           borderRadius: BorderRadius.circular(150.0),
           border: Border.all(
-            color: Colors.tealAccent[700],
+            color: Colors.teal[300],
             width: 5,
           )
         ),
