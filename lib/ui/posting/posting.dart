@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:uf_ride_share_app/components/date_picker.dart';
+// import 'package:uf_ride_share_app/components/date_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../styles/style.dart';
+import 'package:uf_ride_share_app/models/user.dart';
 
 /*
   Postings page with validator to check that there is no empty field
@@ -237,9 +238,11 @@ class _PostingState extends State<Posting> {
 
 
       //get id of logged in user
-      final FirebaseAuth _auth = FirebaseAuth.instance;
-      FirebaseUser user = await _auth.currentUser();
-      final uid = user.uid;
+      // final FirebaseAuth _auth = FirebaseAuth.instance;
+      // FirebaseUser user = await _auth.currentUser();
+      // final uid = user.uid;
+    String currentUser;
+    currentUser = await getCurrentUser();
 
     await databaseReference.collection("Rides").add({
       'description': _description,
@@ -248,7 +251,7 @@ class _PostingState extends State<Posting> {
       'start_location': _fromCity,
       'time': new DateTime(
           _date.year, _date.month, _date.day, picked.hour, picked.minute),
-      'driver': uid,
+      'driver': currentUser,
       'passengers': []
     });
   }
