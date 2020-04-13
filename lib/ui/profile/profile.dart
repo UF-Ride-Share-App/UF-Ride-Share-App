@@ -12,14 +12,7 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileMainHeader extends State<Profile> {
-  // int _currentIndex = 0;
-  
-  // final List<Widget> _tabPages = [
-  //   Postings(),
-  //   Upcoming(),
-  //   History()
-  // ];
-  
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
