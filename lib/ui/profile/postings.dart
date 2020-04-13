@@ -26,10 +26,11 @@ class Postings extends StatelessWidget{
         color: Colors.white,
         height: MediaQuery.of(context).size.height,
         child: PostList(Firestore.instance.collection('Rides')
-        .where('driver', isEqualTo: currentUser)
-        .where('time', isGreaterThanOrEqualTo: lowerRange)
-        .orderBy('time', descending: true)
-        .snapshots()),
+          .where('driver', isEqualTo: currentUser)
+          .where('time', isGreaterThanOrEqualTo: lowerRange)
+          .orderBy('time')
+          .snapshots()
+        ),
       ),
     );
   }
