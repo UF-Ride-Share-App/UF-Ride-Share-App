@@ -29,7 +29,7 @@ class Upcoming extends StatelessWidget{
         child: PostList(Firestore.instance.collection('Rides')
           .where('passengers', arrayContains: currentUser)
           .where('time', isGreaterThanOrEqualTo: lowerRange)
-          .orderBy('time')
+          .orderBy('time') 
           .snapshots()
         ),
       ),

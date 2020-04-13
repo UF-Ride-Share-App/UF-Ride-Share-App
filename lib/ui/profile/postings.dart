@@ -17,7 +17,7 @@ class Postings extends StatelessWidget{
         dateTime.minute,
         dateTime.second
     ));
-    
+    print('lower range is ' + lowerRange.toString());
     return SizedBox(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
