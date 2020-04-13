@@ -211,11 +211,11 @@ class _PostingState extends State<Posting> {
                             borderSide: BorderSide(
                                 color: Colors.tealAccent[700], width: 1.0),
                           ),
-                          labelText: "Additional information"),
+                          labelText: "Please include contact information."),
                       keyboardType: TextInputType.multiline,
                       maxLines: null,
                       style:
-                          TextStyle(fontSize: 20, fontFamily: FontNameUbuntu),
+                          TextStyle(fontSize: 15, fontFamily: FontNameUbuntu),
                       onChanged: (text) {
                         _description = text;
                       },
