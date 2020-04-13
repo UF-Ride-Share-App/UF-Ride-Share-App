@@ -9,7 +9,9 @@ class Ride {
   final String startLocation;
   final String endLocation;
   final String description;
+  final String rating;
   final DocumentReference reference;
+  
 
   int getAvailableSeats() {
     return seats - passengers.length;
@@ -23,6 +25,7 @@ class Ride {
         assert(map['start_location'] != null),
         assert(map['end_location'] != null),
         assert(map['description'] != null),
+        rating = map['rating'],
         driver = map['driver'],
         passengers = List<String>.from(map['passengers']),
         time = (map['time'] as Timestamp).toDate(),
