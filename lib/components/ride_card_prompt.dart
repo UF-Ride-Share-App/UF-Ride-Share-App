@@ -12,7 +12,7 @@ class RideCartPrompt extends StatelessWidget {
   final databaseReference = Firestore.instance;
   var _numSeatsSelected = '0';
   var seatCount = 0;
-   List<String> pastPassengers;
+  List<String> pastPassengers;
 
   RideCartPrompt({this.ride});
 
@@ -25,17 +25,14 @@ class RideCartPrompt extends StatelessWidget {
     print('Ride count is '+ rideCount.toString());
       if(ride.getAvailableSeats() > 0){
         // seatCount = rideCount - 1;
-        // print(seatCount);
-        
+        // print(seatCount);     
         _addRider();
       } else{
         print('Cannot add seats');
       }
-
     }
     else if (action == 1) { // User wants to leave a ride
       _removeRider();
-
     }
     else { // User wants to edit a ride
 
@@ -143,42 +140,34 @@ class RideCartPrompt extends StatelessWidget {
   Widget build(BuildContext context){
     return createDialog(context);
   }
-    void _addRider() async {
-
-   
+    
+  void _addRider() async {  
     String currentUser;
     pastPassengers = ride.passengers;
     currentUser = await getCurrentUser();
-      pastPassengers.add(currentUser);
+    pastPassengers.add(currentUser);
 
     print('current user is' + currentUser);
     print(pastPassengers);
     
     await databaseReference.collection("Rides").document(ride.id).updateData({
       //'seats': seatCount,
-
       'passengers': pastPassengers,
-
-    }
-    );
+    });
   }
-  void _removeRider() async {
-
-   
+  
+  void _removeRider() async { 
     String currentUser;
     pastPassengers = ride.passengers;
     currentUser = await getCurrentUser();
-      pastPassengers.remove(currentUser);
+    pastPassengers.remove(currentUser);
 
     print('current user is' + currentUser);
     print(pastPassengers);
     
     await databaseReference.collection("Rides").document(ride.id).updateData({
       //'seats': seatCount,
-
       'passengers': pastPassengers,
-
-    }
-    );
+    });
   }
 }
