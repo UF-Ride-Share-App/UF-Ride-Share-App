@@ -273,7 +273,8 @@ class _PostingState extends State<Posting> {
         'time': new DateTime(
             _date.year, _date.month, _date.day, picked.hour, picked.minute),
         'driver': currentUser,
-        'passengers': []
+        'passengers': [],
+        'rating': null,
       });
     } else {
      //show snack bar
