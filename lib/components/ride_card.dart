@@ -76,7 +76,6 @@ class RideCard extends StatelessWidget {
           side: BorderSide(color: Colors.lightGreenAccent)
         ),
         onPressed: () {
-          // print('pressed');
           RideCartPrompt(ride: ride).createDialog(context);
         },
         child: Container(

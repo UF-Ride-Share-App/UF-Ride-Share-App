@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:uf_ride_share_app/ui/posting/posting_list.dart';
+import 'package:uf_ride_share_app/models/ride.dart';
 import 'package:uf_ride_share_app/ui/landing/search.dart';
+import 'package:uf_ride_share_app/ui/posting/posting_list.dart';
 
 class Landing extends StatefulWidget {
   @override
@@ -13,6 +14,8 @@ class _LandingState extends State<Landing> {
       Firestore.instance.collection('Rides').snapshots();
   String startLocation = '';
   String endLocation = '';
+  DateTime upperTime;
+  DateTime lowerTime;
 
   @override
   Widget build(BuildContext context) {
@@ -44,30 +47,36 @@ class _LandingState extends State<Landing> {
                     child: Search(
                         onSearch: (String start, String end, DateTime time) {
                       setState(() {
+                        startLocation = start;
+                        endLocation = end;
                         if (time != null) {
-                          Timestamp lowerRange = Timestamp.fromDate(
-                              DateTime.utc(time.year, time.month, time.day));
-                          Timestamp upperRange = Timestamp.fromDate(DateTime.utc(
-                              time.year, time.month, time.day, 23, 59, 59));
                           stream = Firestore.instance
                               .collection('Rides')
-                              .where('time', isGreaterThanOrEqualTo: lowerRange)
-                              .where('time', isLessThanOrEqualTo: upperRange)
+                              .where('time', isGreaterThanOrEqualTo: Timestamp.fromDate(lowerTime))
+                              .where('time', isLessThanOrEqualTo: Timestamp.fromDate(upperTime))
                               .snapshots();
-                        } else {
-                          print('no time');
-                          stream = Firestore.instance
-                              .collection('Rides')
-                              .snapshots();
+                          lowerTime = DateTime(time.year, time.month, time.day);
+                          upperTime = DateTime(
+                              time.year, time.month, time.day, 23, 59, 59);
                         }
                       });
                     })),
                 Divider(color: Colors.grey),
                 Expanded(
                   flex: 11,
-                  child: PostList(stream),
-                )
+                  child: PostList(stream, filter: filterSnapshotResults),
+                ),
               ],
             )));
+  }
+
+  List<Ride> filterSnapshotResults(List<Ride> rides) {
+    List<Ride> results = rides
+        .where((ride) =>
+            (ride.startLocation == startLocation || startLocation == '') &&
+            (ride.endLocation == endLocation || endLocation == ''))
+        .toList();
+    results.sort((rideA, rideB) => rideA.time.compareTo(rideB.time));
+    return results;
   }
 }
