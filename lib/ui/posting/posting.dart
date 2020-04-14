@@ -57,7 +57,13 @@ class _PostingState extends State<Posting> {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
+    return Scaffold (
+      appBar: AppBar(
+         backgroundColor: Colors.lightGreenAccent,
+          title: Text("Make a Posting"),
+          centerTitle: true,
+      ),
+      body: Form(
         key: _formKey,
         child: new Container(
           alignment: Alignment.center,
@@ -65,9 +71,8 @@ class _PostingState extends State<Posting> {
             margin: EdgeInsets.all(30),
             child: ListView(
               children: <Widget>[
-                Text("Make a Posting",
-                    textAlign: TextAlign.center,
-                    style: FlexibleSpaceBarTextStyle),
+
+
                 // Departure form
                 new Container(
                   margin:
@@ -80,14 +85,15 @@ class _PostingState extends State<Posting> {
                             TextStyle(fontFamily: FontNameUbuntu, fontSize: 18),
                         hintStyle: TextStyle(fontSize: 18),
                         border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: Colors.teal[300], width: 1.0),
+                          borderSide:
+                              BorderSide(color: Colors.teal[300], width: 1.0),
                         )),
                     validator: (input) =>
                         input.isEmpty ? "Please enter a city name" : null,
                     onChanged: (input) => _fromCity = input,
                   ),
                 ),
+
                 //Arrival form
                 new Container(
                   margin: EdgeInsets.only(left: 20, right: 20, bottom: 10),
@@ -99,14 +105,15 @@ class _PostingState extends State<Posting> {
                             TextStyle(fontFamily: FontNameUbuntu, fontSize: 18),
                         hintStyle: TextStyle(fontSize: 18),
                         border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: Colors.teal[300], width: 1.0),
+                          borderSide:
+                              BorderSide(color: Colors.teal[300], width: 1.0),
                         )),
                     validator: (input) =>
                         input.isEmpty ? "Please enter a city name" : null,
                     onChanged: (input) => _toCity = input,
                   ),
                 ),
+
                 //Show chosen date
                 new Row(children: <Widget>[
                   Container(
@@ -118,26 +125,28 @@ class _PostingState extends State<Posting> {
                               : DateFormat.yMMMd().format(_date),
                           style: TextStyle(
                               fontSize: 20, fontFamily: FontNameUbuntu))),
+
                   //Date picker button
                   Container(
                       alignment: Alignment.topLeft,
                       child: RaisedButton(
-                        child: Icon(Icons.calendar_today),
-                        onPressed: () {
-                          showDatePicker(
-                                  context: context,
-                                  initialDate:
-                                      _date == null ? DateTime.now() : _date,
-                                  firstDate: DateTime(2020),
-                                  lastDate: DateTime(2021))
-                              .then((date) {
-                            setState(() {
-                              _date = date;
+                          child: Icon(Icons.calendar_today),
+                          onPressed: () {
+                            showDatePicker(
+                                    context: context,
+                                    initialDate:
+                                        _date == null ? DateTime.now() : _date,
+                                    firstDate: DateTime(2020),
+                                    lastDate: DateTime(2021))
+                                .then((date) {
+                              setState(() {
+                                _date = date;
+                              });
                             });
-                          });
-                        },
-                      ))
+                          },
+                          color: Colors.tealAccent[700]))
                 ]),
+
                 //Time text
                 new Row(children: <Widget>[
                   Container(
@@ -146,13 +155,16 @@ class _PostingState extends State<Posting> {
                       child: Text(timeText == "" ? 'No time chosen' : timeText,
                           style: TextStyle(
                               fontSize: 20, fontFamily: FontNameUbuntu))),
+
                   //Time picker
                   RaisedButton(
                       child: Icon(Icons.access_time),
                       onPressed: () {
                         selectTime(context);
-                      })
+                      },
+                      color: Colors.tealAccent[700])
                 ]),
+
                 //Seats text
                 new Row(children: <Widget>[
                   Container(
@@ -160,6 +172,7 @@ class _PostingState extends State<Posting> {
                       child: Text('Seats:',
                           style: TextStyle(
                               fontSize: 20, fontFamily: FontNameUbuntu))),
+
                   //Seats picker
                   Container(
                       margin: EdgeInsets.only(bottom: 10),
@@ -179,6 +192,7 @@ class _PostingState extends State<Posting> {
                         value: _numSeatsSelected,
                       ))
                 ]),
+
                 //Description text
                 Container(
                     alignment: Alignment.topLeft,
@@ -186,6 +200,7 @@ class _PostingState extends State<Posting> {
                     child: Text('Description',
                         style: TextStyle(
                             fontSize: 20, fontFamily: FontNameUbuntu))),
+
                 //Description input form
                 Container(
                     margin: EdgeInsets.only(left: 15, right: 15),
@@ -196,11 +211,11 @@ class _PostingState extends State<Posting> {
                             borderSide: BorderSide(
                                 color: Colors.tealAccent[700], width: 1.0),
                           ),
-                          labelText: "Additional information"),
+                          labelText: "Please include contact information."),
                       keyboardType: TextInputType.multiline,
                       maxLines: null,
                       style:
-                          TextStyle(fontSize: 20, fontFamily: FontNameUbuntu),
+                          TextStyle(fontSize: 15, fontFamily: FontNameUbuntu),
                       onChanged: (text) {
                         _description = text;
                       },
@@ -218,7 +233,7 @@ class _PostingState extends State<Posting> {
               ],
             ),
           ),
-        ));
+        )));
   }
 
 //if validate, then save input in city variables, else print error message
@@ -226,34 +241,50 @@ class _PostingState extends State<Posting> {
     // if (_date == null) {
     //   print("error");
     // }
-    // if (_formKey.currentState.validate()) {
-    //   _formKey.currentState.save();
-    //   print(_fromCity);
-    //   print(_toCity);
-    //   print(_date);
-    //   print(timeText);
-    //   print(_numSeatsSelected);
-    //   print(_description);
-    // }
+    if (_formKey.currentState.validate()) {
+      _formKey.currentState.save();
+      //   print(_fromCity);
+      //   print(_toCity);
+      //   print(_date);
+      //   print(timeText);
+      //   print(_numSeatsSelected);
+      //   print(_description);
+    }
 
+    //get id of logged in user
+    // final FirebaseAuth _auth = FirebaseAuth.instance;
+    // FirebaseUser user = await _auth.currentUser();
+    // final uid = user.uid;
+    if (_toCity != null &&
+        _toCity.isNotEmpty &&
+        _fromCity != null &&
+        _fromCity.isNotEmpty &&
+        picked != null &&
+        _date != null) {
+      print("pass");
+      String currentUser;
+      currentUser = await getCurrentUser();
 
-      //get id of logged in user
-      // final FirebaseAuth _auth = FirebaseAuth.instance;
-      // FirebaseUser user = await _auth.currentUser();
-      // final uid = user.uid;
-    String currentUser;
-    currentUser = await getCurrentUser();
-
-    await databaseReference.collection("Rides").add({
-      'description': _description,
-      'end_location': _toCity,
-      'seats': int.parse(_numSeatsSelected),
-      'start_location': _fromCity,
-      'time': new DateTime(
-          _date.year, _date.month, _date.day, picked.hour, picked.minute),
-      'driver': currentUser,
-      'passengers': []
-    });
+      await databaseReference.collection("Rides").add({
+        'description': _description,
+        'end_location': _toCity,
+        'seats': int.parse(_numSeatsSelected),
+        'start_location': _fromCity,
+        'time': new DateTime(
+            _date.year, _date.month, _date.day, picked.hour, picked.minute),
+        'driver': currentUser,
+        'passengers': [],
+        'rating': null,
+      });
+    } else {
+     //show snack bar
+     Scaffold.of(context).showSnackBar(
+       SnackBar(
+         content: Text("Please fill out all required information!"),
+         backgroundColor: Colors.red,
+       )
+     ); 
+    }
   }
 
 //update shown value in list button with selected value

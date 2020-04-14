@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:uf_ride_share_app/ui/profile/driveHistory.dart';
 import 'package:uf_ride_share_app/ui/profile/history.dart';
 import 'package:uf_ride_share_app/ui/profile/postings.dart';
 import 'package:uf_ride_share_app/ui/profile/upcoming.dart';
@@ -6,25 +7,18 @@ import 'package:uf_ride_share_app/utils/firebase_auth.dart';
 import 'profile_header.dart';
 import '../../styles/style.dart';
 
-class Profile extends StatefulWidget {
+class Profile extends StatefulWidget { 
   @override
   _ProfileMainHeader createState() => _ProfileMainHeader();
 }
 
 class _ProfileMainHeader extends State<Profile> {
-  // int _currentIndex = 0;
-  
-  // final List<Widget> _tabPages = [
-  //   Postings(),
-  //   Upcoming(),
-  //   History()
-  // ];
-  
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: DefaultTabController(
-        length: 3,
+        length: 4,
         child: NestedScrollView(
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return <Widget>[
@@ -65,10 +59,13 @@ class _ProfileMainHeader extends State<Profile> {
                     labelColor: Colors.black,
                     unselectedLabelColor: Colors.black,
                     indicatorColor: Colors.lightGreenAccent,
+                    isScrollable: true,    
                     tabs: [
                       Tab(text: 'Postings'),
                       Tab(text: 'Future Trips'),
                       Tab(text: 'Ride History'),
+                      Tab(text: 'Drive History'),
+
                     ]),
                 ),
                 pinned: true,
@@ -80,6 +77,7 @@ class _ProfileMainHeader extends State<Profile> {
             Postings(),
             Upcoming(),
             History(),
+            DriveHistory(),
           ]),
         )
       )

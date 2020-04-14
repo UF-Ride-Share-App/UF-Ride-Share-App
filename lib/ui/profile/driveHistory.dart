@@ -4,7 +4,7 @@ import 'package:uf_ride_share_app/ui/posting/posting_list.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 
-class History extends StatelessWidget{
+class DriveHistory extends StatelessWidget{
   
   historicalRides(BuildContext context, String currentUser) {
     
@@ -27,7 +27,7 @@ class History extends StatelessWidget{
         color: Colors.white,
         height: MediaQuery.of(context).size.height,
         child: PostList(Firestore.instance.collection('Rides')
-          .where('passengers', arrayContains: currentUser)
+          .where('driver', isEqualTo: currentUser)
           .where('time', isLessThanOrEqualTo: lowerRange)
           .orderBy('time')
           .snapshots()
