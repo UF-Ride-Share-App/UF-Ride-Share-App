@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:uf_ride_share_app/models/ride.dart';
-import 'package:uf_ride_share_app/components/ride_card.dart';
 import 'package:uf_ride_share_app/ui/landing/search.dart';
+import 'package:uf_ride_share_app/ui/posting/posting_list.dart';
 
 class Landing extends StatefulWidget {
   @override
@@ -50,6 +50,11 @@ class _LandingState extends State<Landing> {
                         startLocation = start;
                         endLocation = end;
                         if (time != null) {
+                          stream = Firestore.instance
+                              .collection('Rides')
+                              .where('time', isGreaterThanOrEqualTo: Timestamp.fromDate(lowerTime))
+                              .where('time', isLessThanOrEqualTo: Timestamp.fromDate(upperTime))
+                              .snapshots();
                           lowerTime = DateTime(time.year, time.month, time.day);
                           upperTime = DateTime(
                               time.year, time.month, time.day, 23, 59, 59);
@@ -59,46 +64,18 @@ class _LandingState extends State<Landing> {
                 Divider(color: Colors.grey),
                 Expanded(
                   flex: 11,
-                  child: _buildStream(context),
+                  child: PostList(stream, filter: filterSnapshotResults),
                 ),
               ],
             )));
   }
 
-  Widget _buildStream(BuildContext context) {
-    return StreamBuilder<QuerySnapshot>(
-      stream: lowerTime != null
-          ? Firestore.instance
-            .collection('Rides')
-            .where('time', isGreaterThanOrEqualTo: Timestamp.fromDate(lowerTime))
-            .where('time', isLessThanOrEqualTo: Timestamp.fromDate(upperTime))
-            .snapshots()
-          : Firestore.instance.collection('Rides')
-            .where('time', isGreaterThanOrEqualTo: Timestamp.fromDate(DateTime.now()))
-            .snapshots(),
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) return LinearProgressIndicator();
-        return _buildList(
-            context, filterSnapshotResults(snapshot.data.documents));
-      },
-    );
-  }
-
-  Widget _buildList(BuildContext context, List<Ride> rides) {
-    return ListView(
-        padding: const EdgeInsets.only(top: 20.0),
-        children: rides.map((ride) => _buildListItem(context, ride)).toList());
-  }
-
-  Widget _buildListItem(BuildContext context, Ride ride) {
-    return RideCard(ride: ride);
-  }
-
-  List<Ride> filterSnapshotResults(List<DocumentSnapshot> documents) {
-    List<Ride> results = documents.map((data) => Ride.fromSnapshot(data)).where(
-        (ride) =>
+  List<Ride> filterSnapshotResults(List<Ride> rides) {
+    List<Ride> results = rides
+        .where((ride) =>
             (ride.startLocation == startLocation || startLocation == '') &&
-            (ride.endLocation == endLocation || endLocation == '')).toList();
+            (ride.endLocation == endLocation || endLocation == ''))
+        .toList();
     results.sort((rideA, rideB) => rideA.time.compareTo(rideB.time));
     return results;
   }
