@@ -11,11 +11,11 @@ class Ride {
   final String description;
   final String rating;
   final DocumentReference reference;
-  
 
-  int getAvailableSeats() {
-    return seats - passengers.length;
-  }
+  int getAvailableSeats() => (seats - passengers.length);
+
+  String formatStartCity() => startLocation.split('_')[0] + ', ' + startLocation.split('_')[1];
+  String formatEndCity() => endLocation.split('_')[0] + ', ' + endLocation.split('_')[1];
 
   Ride.fromMap(Map<String, dynamic> map, {this.reference, this.id})
       : assert(map['driver'] != null),
