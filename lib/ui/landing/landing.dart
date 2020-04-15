@@ -46,18 +46,18 @@ class _LandingState extends State<Landing> {
                     height: 230,
                     child: Search(
                         onSearch: (String start, String end, DateTime time) {
-                      setState(() {
-                        startLocation = start;
-                        endLocation = end;
-                        if (time != null) {
-                          stream = Firestore.instance
-                              .collection('Rides')
-                              .where('time', isGreaterThanOrEqualTo: Timestamp.fromDate(lowerTime))
-                              .where('time', isLessThanOrEqualTo: Timestamp.fromDate(upperTime))
-                              .snapshots();
-                          lowerTime = DateTime(time.year, time.month, time.day);
-                          upperTime = DateTime(
-                              time.year, time.month, time.day, 23, 59, 59);
+                          setState(() {
+                            startLocation = start;
+                            endLocation = end;
+                            if (time != null) {
+                              stream = Firestore.instance
+                                  .collection('Rides')
+                                  .where('time', isGreaterThanOrEqualTo: Timestamp.fromDate(lowerTime))
+                                  .where('time', isLessThanOrEqualTo: Timestamp.fromDate(upperTime))
+                                  .snapshots();
+                              lowerTime = DateTime(time.year, time.month, time.day);
+                              upperTime = DateTime(
+                                  time.year, time.month, time.day, 23, 59, 59);
                         }
                       });
                     })),
@@ -73,8 +73,8 @@ class _LandingState extends State<Landing> {
   List<Ride> filterSnapshotResults(List<Ride> rides) {
     List<Ride> results = rides
         .where((ride) =>
-            (ride.startLocation == startLocation || startLocation == '') &&
-            (ride.endLocation == endLocation || endLocation == ''))
+            (ride.startLocation.toLowerCase().trim().contains(startLocation.toLowerCase().trim())|| startLocation == '') &&
+            (ride.endLocation.toLowerCase().trim().contains(endLocation.toLowerCase().trim()) || endLocation == ''))
         .toList();
     results.sort((rideA, rideB) => rideA.time.compareTo(rideB.time));
     return results;

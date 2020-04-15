@@ -28,7 +28,10 @@ class RideCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Text(ride == null ? "-----" : ride.startLocation,
+          Text(
+            ride == null
+              ? "-----"
+              : ride.formatStartCity(),
               style: TextStyle(color: Colors.black)),
           Container(
               height: 16.0,
@@ -45,7 +48,10 @@ class RideCard extends StatelessWidget {
                   Expanded(child: Divider(color: Colors.black.withOpacity(.7))),
                 ],
               )),
-          Text(ride == null ? "-----" : ride.endLocation,
+          Text(
+            ride == null
+              ? "-----"
+              : ride.formatEndCity(),
               style: TextStyle(color: Colors.black))
         ]);
   }
